@@ -174,25 +174,29 @@ IMG = ["""
 try: IMG = IMG[int(sys.argv[1])]
 except: IMG = IMG[0]
 
+os.system("tput civis")
 init()
 
 frames = img[0] *6
 step = 6
 
-while 1:
-    for t in (list(range(-frames, step, step)) +list(range(frames, 0, -step))):
-        print("\033[" +str(int((scr[0] -img[0]) /2)) +"H")
+try:
+    while 1:
+        for t in (list(range(-frames, step, step)) +list(range(frames, 0, -step))):
+            print("\033[" +str(int((scr[0] -img[0]) /2)) +"H")
 
-        for y in range(img[0]):
-            print((" " *int((scr[1] -img[1])/ 2)) +"".join([(get_color(x, y, t) +slt(IMG)[y][x] +"\033[0m") for x in range(len(slt(IMG)[y]))]))
+            for y in range(img[0]):
+                print((" " *int((scr[1] -img[1])/ 2)) +"".join([(get_color(x, y, t) +slt(IMG)[y][x] +"\033[0m") for x in range(len(slt(IMG)[y]))]))
 
-        if t == 0:
-            colors[0].append(colors[0].pop(random.randint(1, 3)))
-            init()
-            time.sleep(.3)
+            if t == 0:
+                colors[0].append(colors[0].pop(random.randint(1, 3)))
+                init()
+                time.sleep(.3)
 
-        time.sleep(.04)
-    time.sleep(1)
+            time.sleep(.04)
+        time.sleep(1)
+finally:
+    os.system("tput cnorm")
 
 
 
