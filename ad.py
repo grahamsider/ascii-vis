@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 
 
-import os, sys, random, time
+import os, sys, random, time, argparse
 
 
+# Argument Parsing
+parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
+parser.add_argument('-i', metavar='<img_num>', type=int, required=False,
+                    help='select image (default: 0)')
+args = parser.parse_args()
+
+# Default Colors
 colors = [
     [37, 31, 33, 34, 35, 36, 32],
     [31, 33, 34, 35, 36, 37, 30]
@@ -164,19 +171,15 @@ IMG = ["""
 """]
 
 
-
-
-
-
 if __name__ == '__main__':
 
-    try: IMG = IMG[int(sys.argv[1])]
+    try: IMG = IMG[args.i]
     except: IMG = IMG[0]
 
     os.system("tput civis")
     init()
 
-    frames = img[0] *6
+    frames = img[0] * 6
     step = 6
 
     try:
