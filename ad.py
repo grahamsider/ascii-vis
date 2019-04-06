@@ -7,8 +7,10 @@ import imgdata
 
 # Argument Parsing
 parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
-parser.add_argument('-i', metavar='<img_num>', type=int, required=False,
+parser.add_argument('-i', '--img', metavar='<img_num>', type=int, required=False,
                     help='select image (default: 0)')
+parser.add_argument('-o', '--once', action='store_true', required=False,
+                    help='set this flag to exit after only one iteration')
 args = parser.parse_args()
 
 # Default Colors
@@ -47,9 +49,16 @@ def init():
     scr = get_scr_size()
     img = get_img_size(IMG)
 
+def exit():
+    os.system("clear")
+    os.system("tput cnorm")
+    sys.exit(0)
+
+
+
 if __name__ == '__main__':
 
-    try: IMG = imgdata.IMG[args.i]
+    try: IMG = imgdata.IMG[args.img]
     except: IMG = imgdata.IMG[0]
 
     os.system("tput civis")
@@ -76,7 +85,7 @@ if __name__ == '__main__':
 
                 time.sleep(.04)
             time.sleep(1)
+            if (args.once):
+                exit()
     finally:
-        os.system("clear")
-        os.system("tput cnorm")
-        sys.exit(0)
+        exit()
