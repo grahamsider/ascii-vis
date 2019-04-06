@@ -7,12 +7,12 @@ import imgdata
 
 # Argument Parsing
 parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
-parser.add_argument('-i', '--img', metavar='<img_num>', type=int, required=False,
+parser.add_argument('-i', '--img', metavar='<img_num>', type=int, default=0, required=False,
                     help='select image (default: 0)')
-parser.add_argument('-o', '--once', action='store_true', required=False,
-                    help='set this flag to exit after only one iteration')
 parser.add_argument('-r', '--rotate', action='store_true', required=False,
                     help='set this flag to rotate through all images, starting at <img_num>')
+parser.add_argument('-d', '--delay', metavar='<delay time (s)>', type=float, default='0.04', required=False,
+                    help='set the amount animation delay (speed) (default: 0.04s)')
 args = parser.parse_args()
 
 # Default Colors
@@ -60,15 +60,16 @@ def exit():
 
 if __name__ == '__main__':
 
-
-    try:
-        IMG = imgdata.IMG[args.img]
-        imgnum = args.img
-    except:
-        IMG = imgdata.IMG[0]
-        imgnum = 0
-
+    # Init
     os.system("tput civis")
+
+    IMG = imgdata.IMG[args.img]
+    imgnum = args.img
+
+    del1 = args.delay * 7.5
+    del2 = args.delay
+    del3 = args.delay * 25
+
     init()
 
     frames = img[0] * 6
@@ -88,15 +89,13 @@ if __name__ == '__main__':
                 if t == 0:
                     colors[0].append(colors[0].pop(random.randint(1, 3)))
                     init()
-                    time.sleep(.3)
+                    time.sleep(del1)
                     if (args.rotate):
                         imgnum = (imgnum + 1) % len(imgdata.IMG)
                         IMG = imgdata.IMG[imgnum]
                         init()
 
-                time.sleep(.04)
-            time.sleep(1)
-            if (args.once):
-                exit()
+                time.sleep(del2)
+            time.sleep(del3)
     finally:
         exit()
