@@ -11,4 +11,5 @@ Supports terminal colors.
 Arguments:
 
 `-h, --help`: Print usage and exit
+
 `-i`: Choose ASCII image to visualize (default: 0)
