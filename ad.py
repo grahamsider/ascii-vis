@@ -2,6 +2,7 @@
 
 
 import os, sys, random, time, argparse
+import imgdata
 
 
 # Argument Parsing
@@ -46,135 +47,10 @@ def init():
     scr = get_scr_size()
     img = get_img_size(IMG)
 
-
-
-
-IMG = ["""
-                  `,:;'''++''';:,`
-              ,'++++############++++',
-           :'++######################++':
-        `'++########++';::;;;''++++#####++'`
-       '+########++;`            .:'++#####+'
-     :++#######+'`                   ,++####++:
-    ;+#######+'`         .,,,.`        ;+#####+;
-   '+#####+'''       ,'+++++++++'`      ,+#####+'
-  ;+######+';     `'++##++''''++++:      '+#####+;
- ,+######+';     ;+###++,      .'++:    ,++######+,
- '+######++.    ;+###+'    :''''+++'    ,++######+'
-.++######+'    ,+###+'   :++####+';'    `++######++.
-:+#######+'    ;+###+;   '+#####+++'    ;++#######+:
-:+#######+'    ;+###+;   :++++++'''`   ,++########+:
-,+#######+'    :+###++.   .'',`;':    ,+##########+,
-.++######++.   .++##++,`     `       '+##########++.
- '+#######+;     '+####+'         :'+############+'
- ,++######++,    `'+#####+++'''+++##############++,
-  :+#######++.    :+############################+:
-   ;+#######++.    ,++#########################+;
-    :+########+;     ;++######################+:
-     .'+#######++,     :'++#################+'.
-       :++#######++;      :'+#############++:
-         :++########++':`  :++##########++:
-           .;+++########+++#########+++;.
-               :'+++++########+++++':
-                    .,:;;;;;;:,.
-""",
-"""
-                        ..
-                        dd`
-                       sMMy
-                      /MMMMo
-                     -NMMMMM/
-                    `mMMMMMMN-
-                   `dMMMMMMMMN.
-                   yMMMMMMMMMMm`
-                  `-hMMMMMMMMMMd`
-                 oMh+/hMMMMMMMMMh`
-                +MMMMMdymMMMMMMMMh
-               +MMMMMMMMMMMMMMMMMMy
-              +MMMMMMMMMMMMMMMMMMMMy
-             +MMMMMMMMMMMMMMMMMMMMMMy
-            +MMMMMMMMMMMMMMMMMMMMMMMMy
-           +MMMMMMMMMMMmhhmMMMMMMMMMMMy
-          oMMMMMMMMMMh-    .yMMMMMMMMMMy
-         oMMMMMMMMMMs        +MMMMMMMMMMh
-        sMMMMMMMMMMm          hMMMMMMMMMMh`
-       sMMMMMMMMMMMo          :MMMMMMNddNMh`
-      yMMMMMMMMMMMM/          .MMMMMMMMNs///
-     yMMMMMMMMMMMMMo          :MMMMMMMMMMMmo`
-   `hMMMMMMMMMNhs+:.          `:+shNMMMMMMMMNy`
-  `hMMMMMNho:`                      `:ohNMMMMMd`
- `dMMNh+-                                -+hNMMm.
-`mdo:                                        :odm.
-:.                                              .:
-""",
-"""
-                                         . `
-                                        :+/-
-                                       /yy:/oo.   .::::-.
-                      `N/`-           `hMMo:   .yNMMMMMMMNy`
-                       -d:o//        `dd.     /MMMMMMMMMMMM-
-                        `yy+./+      .hdhs/.-yMMMMMMMMMMMd-
-                     oh//NMo.`     .:+osyMMMMMMMMMMMMMMd/
-                         so    .ohNMMMMMMMMMMMNooyddho-
-                         m.  .hMMMMMMMMMMMMdmM-
-                         Nh+yMMMMMMmdddmds- oN
-                         NMMMMMMMy`         +Ns.`/y/-
-                       .yMMMMMMMM/           `:smd++o+
-                     :hMMMMMNdhydm/   :+        `o//`
-                   :dMMMMmy/`    `omyhh+os`        ::
-                 `yMMMNs-          .msy:.
-                 hMMm+`            .h y.+s`
-                +MMy`             /d: om-`
-                mMh                   `oh
-               -MM.
-               +MN
-               sMd
-               dMs
-              -MN.
-             .mN:
-           `oNh.
-         -sNd:
-     `:sdho.
- `:+oo/.
-`-`
-""",
-"""
-                       `.
-                       ,:`
-                       :;`
-                      ,;;:`
-                     `:;';.
-    `,`              `;'';.              `,`
-     ,;,`            ,;''':            `,;,
-      ,;;,.          ,;'';:`         .,;;:
-      .;'';,`        ,;''':`       `,;'';.
-      `:;''';.      `:'''';.      .:''';:`
-       `;'''';,`    `:;''';`    `.;'''';.
-        `:'''';:`    :'''';`   `:;'''';.
-         `:;''';;.   :;''';.  `:;'''';.
-          .:;'''':.  .;''':` `:;'''';.
-           `:;'''':` `;'';, `:;'''';.
-`.````      `,;''';,`.;'';,`,;''';:`      ````.`
- .:;;;;:,,``  `:;''',`,'';`.;'';;.  ``,,:;;;;:.
-   .:;'''';;:,``,;'';,,;':.;'';:.`,:;;'''';:.
-     .:;;''''';;,.:;';,;'::';;,,:;''''';;,`
-       `.::;;'''';:,;';;;;';::;'''';;:,`
-           `.,::;;;;;;;;;;;;;;;;:,.`
-                 `.,;;;'';;;,.`
-              `.,:;'''';;;''';;:.`
-            .:;;''''';,.:.;'''''';;,`
-         `.:;;';;;;:,` .: `.::;;;;;;;,`
-        `......``      .:       `````..`
-                       ,:
-                       ,:
-                       ,,
-"""]
-
-
 if __name__ == '__main__':
 
-    try: IMG = IMG[args.i]
-    except: IMG = IMG[0]
+    try: IMG = imgdata.IMG[args.i]
+    except: IMG = imgdata.IMG[0]
 
     os.system("tput civis")
     init()
