@@ -11,6 +11,8 @@ parser.add_argument('-i', '--img', metavar='<img_num>', type=int, required=False
                     help='select image (default: 0)')
 parser.add_argument('-o', '--once', action='store_true', required=False,
                     help='set this flag to exit after only one iteration')
+parser.add_argument('-r', '--rotate', action='store_true', required=False,
+                    help='set this flag to rotate through all images, starting at <img_num>')
 args = parser.parse_args()
 
 # Default Colors
@@ -58,8 +60,13 @@ def exit():
 
 if __name__ == '__main__':
 
-    try: IMG = imgdata.IMG[args.img]
-    except: IMG = imgdata.IMG[0]
+
+    try:
+        IMG = imgdata.IMG[args.img]
+        imgnum = args.img
+    except:
+        IMG = imgdata.IMG[0]
+        imgnum = 0
 
     os.system("tput civis")
     init()
@@ -82,6 +89,10 @@ if __name__ == '__main__':
                     colors[0].append(colors[0].pop(random.randint(1, 3)))
                     init()
                     time.sleep(.3)
+                    if (args.rotate):
+                        imgnum = (imgnum + 1) % len(imgdata.IMG)
+                        IMG = imgdata.IMG[imgnum]
+                        init()
 
                 time.sleep(.04)
             time.sleep(1)
