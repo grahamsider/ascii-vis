@@ -2,7 +2,7 @@
 
 
 import os, sys, random, time, argparse
-import imgdata
+from data import asciidata
 
 # Argument Parsing
 parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     # Init
     os.system("tput civis")
 
-    IMG = imgdata.IMG[args.img]
+    IMG = asciidata.IMG[args.img]
     imgnum = args.img
 
     init_screen()
@@ -88,8 +88,8 @@ if __name__ == '__main__':
                     init_screen()
                     time.sleep(args.delay[0])
                     if (args.rotate):
-                        imgnum = (imgnum + 1) % len(imgdata.IMG)
-                        IMG = imgdata.IMG[imgnum]
+                        imgnum = (imgnum + 1) % len(asciidata.IMG)
+                        IMG = asciidata.IMG[imgnum]
                         init_screen()
 
                 time.sleep(args.utime)
