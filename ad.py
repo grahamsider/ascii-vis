@@ -4,15 +4,18 @@
 import os, sys, random, time, argparse
 import imgdata
 
-
 # Argument Parsing
 parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
 parser.add_argument('-i', '--img', metavar='<img_num>', type=int, default=0, required=False,
                     help='select image (default: 0)')
 parser.add_argument('-r', '--rotate', action='store_true', required=False,
                     help='set this flag to rotate through all images, starting at <img_num>')
-parser.add_argument('-d', '--delay', metavar='<delay time (s)>', type=float, default='0.04', required=False,
-                    help='set the amount animation delay (speed) (default: 0.04s)')
+parser.add_argument('-u', '--utime', metavar='<sec>', type=float, default='0.04', required=False,
+                    help='unit time: seconds between updates (default: 0.04s)')
+parser.add_argument('-s', '--speed', metavar='<int>', type=int, default=6, required=False,
+                    help='number of characters changed per unit time')
+parser.add_argument('-d', '--delay', metavar='<sec>', nargs=2, type=float, default=[0.3, 1.0], required=False,
+        help='number of seconds to sleep when image disappears and stays colored respectively (default: 0.3, 1.0)')
 args = parser.parse_args()
 
 # Default Colors
@@ -45,7 +48,7 @@ def get_color(x, y, t):
                 return "\033[" +str(colors[0][i]) +"m"
     return t <= 0 and "\033[30m" or "\033[" +str(colors[0][-1]) +"m"
 
-def init():
+def init_screen():
     global scr, img
     os.system("clear")
     scr = get_scr_size()
@@ -56,8 +59,6 @@ def exit():
     os.system("tput cnorm")
     sys.exit(0)
 
-
-
 if __name__ == '__main__':
 
     # Init
@@ -66,14 +67,10 @@ if __name__ == '__main__':
     IMG = imgdata.IMG[args.img]
     imgnum = args.img
 
-    del1 = args.delay * 7.5
-    del2 = args.delay
-    del3 = args.delay * 25
-
-    init()
+    init_screen()
 
     frames = img[0] * 6
-    step = 6
+    step = args.speed
 
     try:
         while 1:
@@ -88,14 +85,14 @@ if __name__ == '__main__':
 
                 if t == 0:
                     colors[0].append(colors[0].pop(random.randint(1, 3)))
-                    init()
-                    time.sleep(del1)
+                    init_screen()
+                    time.sleep(args.delay[0])
                     if (args.rotate):
                         imgnum = (imgnum + 1) % len(imgdata.IMG)
                         IMG = imgdata.IMG[imgnum]
-                        init()
+                        init_screen()
 
-                time.sleep(del2)
-            time.sleep(del3)
+                time.sleep(args.utime)
+            time.sleep(args.delay[1])
     finally:
         exit()
