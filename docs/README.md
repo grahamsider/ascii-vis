@@ -8,7 +8,7 @@ Supports terminal colors.
 
 `python3` `/path/to/vis.py` `[args]`
 
-Optional Arguments:
+### Optional Arguments:
 
   `-h`, `--help`: show help message and exit
 
@@ -21,3 +21,9 @@ Optional Arguments:
   `-s`, `--speed <int>`: number of characters changed per unit time (default: 6)
 
   `-d`, `--delay <sec> <sec>`: number of seconds to sleep when image disappears and stays colored respectively (default: 0.3, 1.0)
+
+## Customization
+
+Place any ASCII image you wish to visualize into another section of data/asciidata.py
+
+Image selection is done with the `-i` argument, image numbers are in-order corresponding to asciidata
