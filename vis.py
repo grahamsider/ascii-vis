@@ -9,13 +9,13 @@ parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
 parser.add_argument('-i', '--img', metavar='<img_num>', type=int, default=0, required=False,
                     help='select image (default: 0)')
 parser.add_argument('-r', '--rotate', action='store_true', required=False,
-                    help='set this flag to rotate through all images, starting at <img_num>')
+                    help='set this flag to rotate through all images (starts at <img_num>, specified above)')
 parser.add_argument('-u', '--utime', metavar='<sec>', type=float, default='0.04', required=False,
-                    help='unit time: seconds between updates (default: 0.04s)')
+                    help='unit time - seconds between updates (default: 0.04s)')
 parser.add_argument('-s', '--speed', metavar='<int>', type=int, default=6, required=False,
-                    help='number of characters changed per unit time')
+                    help='number of characters changed per unit time (default: 6)')
 parser.add_argument('-d', '--delay', metavar='<sec>', nargs=2, type=float, default=[0.3, 1.0], required=False,
-        help='number of seconds to sleep when image disappears and stays colored respectively (default: 0.3, 1.0)')
+                    help='number of seconds to sleep when image disappears and stays colored respectively (default: 0.3, 1.0)')
 args = parser.parse_args()
 
 # Default Colors
