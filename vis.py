@@ -8,6 +8,8 @@ from data import asciidata
 parser = argparse.ArgumentParser(description='CLI ASCII Visualiser')
 parser.add_argument('-i', '--img', metavar='<img_num>', type=int, default=0, required=False,
                     help='select image (default: 0)')
+parser.add_argument('-b', '--bold', action='store_true', required=False,
+                    help='set this flag to use bold terminal colors')
 parser.add_argument('-r', '--rotate', action='store_true', required=False,
                     help='set this flag to rotate through all images (starts at <img_num>, specified above)')
 parser.add_argument('-u', '--utime', metavar='<sec>', type=float, default='0.04', required=False,
@@ -19,9 +21,14 @@ parser.add_argument('-d', '--delay', metavar='<sec>', nargs=2, type=float, defau
 args = parser.parse_args()
 
 # Default Colors
-colors = [
+colors_def = [
     [37, 31, 33, 34, 35, 36, 32],
     [31, 33, 34, 35, 36, 37, 30]
+]
+
+colors_bold = [
+    [97, 91, 93, 94, 95, 96, 92],
+    [91, 93, 94, 95, 96, 97, 30]
 ]
 
 def slt(img):
@@ -33,11 +40,8 @@ def get_scr_size():
 def get_img_size(img):
     return [IMG.count("\n"), max([len(x) for x in slt(IMG)])]
 
-def get_color(x, y, t):
-    global colors, img
-
+def get_color(x, y, t, colors):
     f = x -max(img) +abs(t)
-
     off = random.randint(0, 16)
 
     for i in range(6, -1, -1):
@@ -66,6 +70,7 @@ if __name__ == '__main__':
 
     IMG = asciidata.IMG[args.img]
     imgnum = args.img
+    colors = colors_bold if args.bold else colors_def
 
     init_screen()
 
@@ -79,7 +84,7 @@ if __name__ == '__main__':
 
                 for y in range(img[0]):
                     print ((" " * int((scr[1] - img[1]) / 2))
-                            + "".join([(get_color(x, y, t)
+                            + "".join([(get_color(x, y, t, colors)
                             + slt(IMG)[y][x] + "\033[0m")
                             for x in range(len(slt(IMG)[y]))]))
 
